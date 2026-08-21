@@ -8,7 +8,7 @@ The photodiode converts the detected optical signal into a very small photocurre
 
 The TIA converts the photocurrent into a measurable voltage. This voltage can then be observed using an oscilloscope or another electrical measurement instrument.
 
-#Laser – Generation of the Optical Signal
+# Laser – Generation of the Optical Signal
 
 The first component in the system is the laser.
 The laser is the source of the optical signal that we want to work with and eventually detect.
@@ -20,7 +20,7 @@ and the laser power is approximately:
 P≈223.5 mW
 So, at the beginning of the system, we have an optical signal, not an electrical signal.
 
-#Phase Modulator: Controlling the Phase of the Optical Signal
+# Phase Modulator: Controlling the Phase of the Optical Signal
 
 The next component in the optical setup is the phase modulator. In our project, a lithium-niobate phase modulator is used.
 
@@ -41,7 +41,7 @@ The reason we care about the phase is that phase plays an important role in inte
 Therefore, changing the phase of the incoming optical signal can produce a measurable change in the optical response of the system.
 
 
-#Photodiode - Converting Light into Current
+# Photodiode - Converting Light into Current
 We are using the Thorlabs SM05PD4A photodiode.
 
 Our optical wavelength is approximately:
@@ -64,7 +64,7 @@ For example, it could be in the microampere or even smaller range depending on t
 So we need a circuit capable of handling this small current accurately.
 That is where the TIA comes in.
 
-#What exactly is a TIA?
+# What exactly is a TIA?
 The TIA (Transimpedance Amplifier) is used because the photodiode produces a very small current, while our measuring instruments like an oscilloscope are designed to measure voltage.
 So, the TIA converts the photodiode's small current into a measurable voltage.
 In simple terms:
