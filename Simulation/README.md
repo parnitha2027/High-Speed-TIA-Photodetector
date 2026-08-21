@@ -111,6 +111,35 @@ If the circuit's response starts falling too early, then our design isn't meetin
 This is very important.
 
 Imagine the ideal response is approximately:
+Gain
+ │
+ │───────────────
+ │              \
+ │               \
+ │                \
+ └──────────────────── Frequency
+
+ That's a reasonably controlled response.
+
+But suppose instead it looks like:
+
+Gain
+ │
+ │          /\
+ │         /  \
+ │────────/    \────
+ │
+ └──────────────────── Frequency
+
+That bump is gain peaking.
+
+It means the circuit is amplifying some frequencies more than the nominal response.
+
+We don't want excessive peaking because it indicates that the high-frequency response is becoming less controlled.
+
+So during simulation we looked at:
+
+How much peaking do we get for different feedback capacitor values?
 
 ## 3. Why were we changing C1?
 
