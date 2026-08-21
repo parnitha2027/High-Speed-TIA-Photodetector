@@ -109,28 +109,6 @@ If the circuit's response starts falling too early, then our design isn't meetin
 ## 3. Gain Peaking
 
 This is very important.
-
-Imagine the ideal response is approximately:
-Gain
- │
- │───────────────
- │              \
- │               \
- │                \
- └──────────────────── Frequency
-
- That's a reasonably controlled response.
-
-But suppose instead it looks like:
-
-Gain
- │
- │          /\
- │         /  \
- │────────/    \────
- │
- └──────────────────── Frequency
-
 That bump is gain peaking.
 
 It means the circuit is amplifying some frequencies more than the nominal response.
