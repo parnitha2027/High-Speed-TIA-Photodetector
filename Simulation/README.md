@@ -1,6 +1,6 @@
 # Simulation and Design Verification
 
-## 1. Why did we simulate the TIA?
+## What is the purpose of the simulation stage?
 
 We already decided that our TIA needs to work at high frequency, around the 120 MHz target.
 
@@ -8,7 +8,7 @@ But a high-speed TIA is not as simple as:
 
 > "Put an op-amp + resistor + capacitor and it will work."
 
-The photodiode itself has about 80 pF capacitance.
+The photodiode itself has about **80 pF capacitance**.
 
 The OPA657 also has its own input characteristics.
 
@@ -33,11 +33,44 @@ That's what simulation tells us.
 
 ---
 
-## 2. What exactly were we trying to find out?
+# 1. Why did we simulate the TIA?
+
+We already decided that our TIA needs to work at **high frequency**, around the **120 MHz target**.
+
+But a high-speed TIA is not as simple as:
+
+> "Put an op-amp + resistor + capacitor and it will work."
+
+The photodiode itself has about **80 pF capacitance**.
+
+The OPA657 also has its own input characteristics.
+
+Then we have:
+
+- the feedback resistor
+- the feedback capacitor
+- PCB parasitic capacitance
+- wiring/layout effects
+
+All of these interact.
+
+So even if a calculation says:
+
+> "80 Ω and 15 pF should work"
+
+we still need to ask:
+
+> **Does the complete circuit actually behave properly at high frequency?**
+
+That's what simulation tells us.
+
+---
+
+# 2. What exactly were we trying to find out?
 
 We were mainly interested in four things:
 
-### 1. Gain
+## 1. Gain
 
 The TIA converts photocurrent into voltage.
 
@@ -59,7 +92,7 @@ But we also want to see how that gain behaves as frequency increases.
 
 ---
 
-### 2. Bandwidth
+## 2. Bandwidth
 
 Our target is approximately:
 
@@ -73,7 +106,7 @@ If the circuit's response starts falling too early, then our design isn't meetin
 
 ---
 
-### 3. Gain Peaking
+## 3. Gain Peaking
 
 This is very important.
 
@@ -86,9 +119,7 @@ Gain
  │              \
  │               \
  │                \
- └──────────────────── Frequency
-
-That's a reasonably controlled response.
+ └──────────────────── FrequencyThat's a reasonably controlled response.
 
 But suppose instead it looks like:
 
@@ -137,7 +168,7 @@ That's why we don't just choose Rf based on gain.
 
 We have to consider the entire high-frequency feedback system.
 
-# 3. Why were we changing C1?
+3. Why were we changing C1?
 
 This is the important part.
 
@@ -178,7 +209,7 @@ the peaking decreased.
 
 So simulation showed us how the feedback capacitor affects the high-frequency response.
 
-# 4. Then why didn't we simply choose 16 pF?
+4. Then why didn't we simply choose 16 pF?
 
 This is an important question.
 
@@ -210,7 +241,7 @@ A better explanation is:
 
 That's accurate.
 
-# 5. What was the purpose of the Rf/Cf sweep?
+5. What was the purpose of the Rf/Cf sweep?
 
 This is probably the most important thing to understand.
 
@@ -241,7 +272,7 @@ It helped us answer:
 
 The sweep allowed us to study the relationship between the feedback resistor and feedback capacitor rather than choosing the values arbitrarily.
 
-# 6. What did LTspice do for us?
+6. What did LTspice do for us?
 
 LTspice was basically our virtual laboratory.
 
@@ -257,7 +288,7 @@ we could simulate those combinations.
 
 We could sweep frequency and see:
 
-# What happens to the output as frequency increases?
+What happens to the output as frequency increases?
 
 We could therefore investigate the circuit before manufacturing the PCB.
 
@@ -267,7 +298,7 @@ It allowed us to change component values and observe the resulting response with
 
 This was especially useful because this is a high-speed circuit, where small changes in the feedback network can affect the frequency response and stability.
 
-# 7. What about PSpice?
+7. What about PSpice?
 
 PSpice served as another simulation environment for the design.
 
@@ -290,7 +321,7 @@ The purpose was therefore not simply to draw the circuit again in another softwa
 
 The purpose was to evaluate the actual amplifier behavior using the OPA657 model and verify the design before moving toward hardware.
 
-# 8. So why did we use BOTH LTspice and PSpice?
+8. So why did we use BOTH LTspice and PSpice?
 
 Think of it like this:
 
@@ -316,7 +347,7 @@ It's not:
 
 They are both tools used during the design verification stage.
 
-# 9. What happens if simulation shows the circuit is bad?
+9. What happens if simulation shows the circuit is bad?
 
 This is why simulation comes before PCB fabrication.
 
@@ -368,7 +399,7 @@ That's the important story.
 
 The simulation stage therefore acts as a verification and iteration stage between the theoretical design and the physical implementation.
 
-# 10. What does "stability" mean here?
+10. What does "stability" mean here?
 
 This is something you should understand because your project is a high-speed TIA.
 
@@ -395,7 +426,7 @@ That's why we don't just choose Rf based on gain.
 
 We have to consider the entire high-frequency feedback system.
 
-# 11. Why is the photodiode capacitance important in simulation?
+11. Why is the photodiode capacitance important in simulation?
 
 The SM05PD4A photodiode has approximately 80 pF capacitance at 5 V bias.
 
@@ -425,7 +456,7 @@ Overall high-frequency response
 
 That complete interaction is what we investigate during simulation.
 
-# 12. Why is simulation especially important for this project?
+12. Why is simulation especially important for this project?
 
 The project is designed for a relatively high bandwidth of approximately 120 MHz.
 
@@ -446,7 +477,7 @@ We need to understand how the circuit behaves as frequency changes.
 
 This is why frequency-domain simulation is an important part of the project.
 
-# 13. What did the simulation ultimately help us decide?
+13. What did the simulation ultimately help us decide?
 
 The simulation helped us validate and refine the feedback network.
 
@@ -475,3 +506,43 @@ This gave us evidence for selecting a practical feedback capacitor value.
 The important point is that the component values were not selected completely arbitrarily.
 
 They were investigated through simulation before the design was moved to the physical implementation.
+
+14. What is the complete design flow?
+
+The overall project can now be understood as:
+
+Optical requirement
+        ↓
+Electrical requirement
+        ↓
+Select photodiode
+        ↓
+Select suitable high-speed op-amp
+        ↓
+Determine initial Rf/Cf
+        ↓
+LTspice / PSpice simulation
+        ↓
+Frequency-response analysis
+        ↓
+Gain / bandwidth / peaking / stability evaluation
+        ↓
+Adjust component values if necessary
+        ↓
+Finalize circuit values
+        ↓
+Create schematic
+        ↓
+Assign footprints
+        ↓
+PCB layout
+        ↓
+Fabrication
+        ↓
+Hardware testing
+
+So simulation was not a separate activity unrelated to the PCB.
+
+It was the stage where we asked:
+
+"Before we physically build this circuit, does our proposed design actually meet the required high-speed behavior?"
