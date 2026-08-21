@@ -1,4 +1,4 @@
-What is the overall project about?
+# What is the overall project about?
 
 The basic purpose of this project is to detect and electrically measure an optical signal.
 
